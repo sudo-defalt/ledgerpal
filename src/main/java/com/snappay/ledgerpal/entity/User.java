@@ -25,9 +25,15 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(unique = true, nullable = false)
+    private String email;
+
     @Column(nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "user")
     private Set<Account> accounts;
+
+    @ManyToMany
+    private Set<Authority> authorities;
 }
