@@ -3,6 +3,7 @@ package com.snappay.ledgerpal.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -32,8 +33,8 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private Set<Account> accounts;
+    private Set<Account> accounts = new HashSet<>();
 
     @ManyToMany
-    private Set<Authority> authorities;
+    private Set<Authority> authorities = new HashSet<>();
 }
