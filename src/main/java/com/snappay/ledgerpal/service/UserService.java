@@ -3,7 +3,7 @@ package com.snappay.ledgerpal.service;
 import com.snappay.ledgerpal.entity.User;
 import com.snappay.ledgerpal.exception.UserRegistrationException;
 import com.snappay.ledgerpal.model.UserModel;
-import com.snappay.ledgerpal.model.UserRegistrationModel;
+import com.snappay.ledgerpal.model.operation.UserRegistrationModel;
 import com.snappay.ledgerpal.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;

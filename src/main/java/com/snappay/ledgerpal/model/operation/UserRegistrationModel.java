@@ -1,4 +1,4 @@
-package com.snappay.ledgerpal.model;
+package com.snappay.ledgerpal.model.operation;
 
 import lombok.Data;
 
