@@ -19,7 +19,7 @@ public class UserModel {
         UserModel model = new UserModel();
         model.setUuid(user.getUuid());
         model.setUsername(user.getUsername());
-        model.setUsername(user.getPassword());
+        model.setPassword(user.getPassword());
         model.setEmail(user.getEmail());
         model.setAuthorities(user.getAuthorities().stream()
                 .map(AuthorityModel::build)
