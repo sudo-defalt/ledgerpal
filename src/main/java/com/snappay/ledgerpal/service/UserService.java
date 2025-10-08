@@ -1,9 +1,11 @@
 package com.snappay.ledgerpal.service;
 
+import com.snappay.ledgerpal.entity.Account;
 import com.snappay.ledgerpal.entity.User;
 import com.snappay.ledgerpal.exception.UserRegistrationException;
 import com.snappay.ledgerpal.model.UserModel;
 import com.snappay.ledgerpal.model.operation.UserRegistrationModel;
+import com.snappay.ledgerpal.repository.AccountRepository;
 import com.snappay.ledgerpal.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.UUID;
 public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
 
     @Transactional
     public Optional<UserModel> findByUsername(String username) {
@@ -38,7 +41,12 @@ public class UserService {
         user.setEmail(model.getEmail());
         user.setPassword(passwordEncoder.encode(model.getPassword()));
 
-        user = userRepository.save(user);
+        userRepository.save(user);
+        // each user must have a default account
+        Account defaultAccount = Account.builder()
+                .uuid(UUID.randomUUID()).name(Account.DEFAULT).user(user).balance(0L)
+                .build();
+        accountRepository.save(defaultAccount);
         return UserModel.build(user);
     }
 }

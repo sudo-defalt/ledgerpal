@@ -14,6 +14,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "accounts")
 public class Account {
+    public static final String DEFAULT = "default";
+
     @Id
     @GeneratedValue
     private long id;
