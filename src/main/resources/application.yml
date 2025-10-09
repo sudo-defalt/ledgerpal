@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Ledger Pal
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ledger
+    username: ledger_user
+    password: ledger_pass
+    hikari:
+      schema: ledger
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.default_schema: ledger
+      hibernate.format_sql: true
