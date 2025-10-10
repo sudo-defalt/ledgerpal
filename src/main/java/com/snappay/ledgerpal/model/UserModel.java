@@ -1,5 +1,6 @@
 package com.snappay.ledgerpal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.snappay.ledgerpal.entity.User;
 import lombok.Data;
 
@@ -11,9 +12,11 @@ import java.util.stream.Collectors;
 public class UserModel {
     private UUID uuid;
     private String username;
-    private String password;
     private String email;
     private Set<AuthorityModel> authorities;
+
+    @JsonIgnore
+    private String password;
 
     public static UserModel build(User user) {
         UserModel model = new UserModel();
