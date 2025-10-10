@@ -18,4 +18,16 @@ and of course you can set alarm for a specific account or category of expenses.
 
 ---
 ## Specifications
-* 
+This an App where users only interact with their personal data.
+this fact implicitly guides us toward multi-tenancy design. basically
+each user can be identified as independent tenant.
+multi tenancy can be employed in various ways:
+* using a tenant_id column in each table (in our case user_id)
+* creating separate schema for each tenant in same physical database
+* using database sharding
+* using separate database for each tenant
+
+for our case using a tenant_id column would be a optimal solution
+it will bring a balance to the design, and the other options would
+be pretty much overkill considering size of tenant-specific data in our 
+app is not huge.
