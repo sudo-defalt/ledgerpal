@@ -1,8 +1,8 @@
 package com.snappay.ledgerpal.controller;
 
-import com.snappay.ledgerpal.model.AccountModel;
-import com.snappay.ledgerpal.model.operation.CreateAccountModel;
-import com.snappay.ledgerpal.service.AccountService;
+import com.snappay.ledgerpal.model.CategoryModel;
+import com.snappay.ledgerpal.model.operation.CreateCategoryModel;
+import com.snappay.ledgerpal.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,25 +15,26 @@ import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/accounts")
-public class AccountController {
-    private final AccountService accountService;
+@RequestMapping("/categories")
+public class CategoryController {
+    private final CategoryService categoryService;
 
     @PostMapping
-    public AccountModel create(@AuthenticationPrincipal UserDetails userDetails,
-                               @RequestBody CreateAccountModel model) {
-        return accountService.create(userDetails.getUsername(), model);
+    public CategoryModel create(@AuthenticationPrincipal UserDetails userDetails,
+                                @RequestBody CreateCategoryModel model) {
+        return categoryService.create(userDetails.getUsername(), model);
     }
 
     @GetMapping
-    public Page<AccountModel> getAll(@AuthenticationPrincipal UserDetails userDetails, Pageable pageable) {
-        return accountService.getAll(userDetails.getUsername(), pageable);
+    public Page<CategoryModel> getAll(@AuthenticationPrincipal UserDetails userDetails, Pageable pageable) {
+        return categoryService.getAll(userDetails.getUsername(), pageable);
     }
 
     @GetMapping("/{uuid}")
     public ResponseEntity<?> getOne(@AuthenticationPrincipal UserDetails userDetails, @PathVariable UUID uuid) {
-        return accountService.getOne(userDetails.getUsername(), uuid)
+        return categoryService.getOne(userDetails.getUsername(), uuid)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
 }
