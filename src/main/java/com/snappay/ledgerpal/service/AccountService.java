@@ -3,7 +3,6 @@ package com.snappay.ledgerpal.service;
 import com.snappay.ledgerpal.entity.Account;
 import com.snappay.ledgerpal.entity.Transaction;
 import com.snappay.ledgerpal.entity.User;
-import com.snappay.ledgerpal.exception.AccountNotFoundException;
 import com.snappay.ledgerpal.exception.UserNotFoundException;
 import com.snappay.ledgerpal.model.AccountModel;
 import com.snappay.ledgerpal.model.operation.CreateAccountModel;
