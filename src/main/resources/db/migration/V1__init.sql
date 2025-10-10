@@ -12,14 +12,14 @@ create table ledger.authorities (
    description varchar(255)
 );
 
-create table ledger.users_authorities (
+create table ledger.user_authorities (
    user_id bigserial not null references ledger.users,
    authority_id bigserial not null references ledger.authorities,
-   constraint pk_users_authorities primary key (user_id, authority_id)
+   primary key (user_id, authority_id)
 );
 
 create table ledger.accounts (
-   id bigserial not null unique primary,
+   id bigserial not null unique primary key,
    uuid uuid not null unique,
    name varchar(255),
    balance bigint not null,
@@ -30,10 +30,10 @@ create table ledger.categories (
    id bigserial not null unique primary key,
    uuid UUID not null unique,
    name varchar(255) not null,
-   user_id bigserial not null references ledger.users,
+   user_id bigserial not null references ledger.users
 );
 
-CREATE TABLE transactions (
+CREATE TABLE ledger.transactions (
    id bigserial not null unique primary key,
    uuid uuid not null unique,
    created_at timestamp without time zone not null,
