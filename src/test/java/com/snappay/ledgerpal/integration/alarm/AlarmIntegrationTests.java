@@ -50,7 +50,7 @@ class AlarmIntegrationTests {
         createAlarmModel.setMin(1000);
         createAlarmModel.setMax(10000);
 
-        AlarmModel alarm = alarmService.createAlarm(userModel.getUsername(), createAlarmModel);
+        AlarmModel alarm = alarmService.create(userModel.getUsername(), createAlarmModel);
         assertThat(alarm.getTitle()).isEqualTo(createAlarmModel.getTitle());
     }
 

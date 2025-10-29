@@ -12,6 +12,8 @@ import com.snappay.ledgerpal.repository.AlarmRepository;
 import com.snappay.ledgerpal.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -24,7 +26,7 @@ public class AlarmService {
     private final AlarmRepository alarmRepository;
 
     @Transactional
-    public AlarmModel createAlarm(String username, CreateAlarmModel model) {
+    public AlarmModel create(String username, CreateAlarmModel model) {
         User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
         Account account = accountRepository.findByUuidAndUser(model.getAccount(), user)
                 .orElseThrow(AccountNotFoundException::new);
@@ -36,5 +38,11 @@ public class AlarmService {
                 .build();
         alarm = alarmRepository.save(alarm);
         return AlarmModel.build(alarm);
+    }
+
+    @Transactional
+    public Page<AlarmModel> getAll(String username, Pageable pageable) {
+        User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+        return alarmRepository.findAllByUser(user, pageable).map(AlarmModel::build);
     }
 }
