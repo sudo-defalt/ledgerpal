@@ -3,6 +3,7 @@ package com.snappay.ledgerpal.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -31,4 +32,7 @@ public class Account {
 
     @ManyToOne(optional = false)
     private User user;
+
+    @OneToMany(mappedBy = "account")
+    private Set<Alarm> alarms;
 }
