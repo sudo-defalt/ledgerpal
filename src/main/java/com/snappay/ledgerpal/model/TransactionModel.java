@@ -22,6 +22,7 @@ public class TransactionModel {
         model.setUuid(transaction.getUuid());
         model.setAmount(transaction.getAmount());
         model.setCreatedAt(transaction.getCreatedAt());
+        model.setDescription(transaction.getDescription());
         model.setAccount(transaction.getAccount().getUuid());
         Optional.ofNullable(transaction.getCategory()).map(Category::getUuid).ifPresent(model::setCategory);
         return model;

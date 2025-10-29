@@ -4,8 +4,8 @@ import com.snappay.ledgerpal.model.CategoryModel;
 import com.snappay.ledgerpal.model.operation.CreateCategoryModel;
 import com.snappay.ledgerpal.service.CategoryService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,12 +26,12 @@ public class CategoryController {
     }
 
     @GetMapping
-    public Page<CategoryModel> getAll(@AuthenticationPrincipal UserDetails userDetails, Pageable pageable) {
-        return categoryService.getAll(userDetails.getUsername(), pageable);
+    public PagedModel<CategoryModel> getAll(@AuthenticationPrincipal UserDetails userDetails, Pageable pageable) {
+        return new PagedModel<>(categoryService.getAll(userDetails.getUsername(), pageable));
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<?> getOne(@AuthenticationPrincipal UserDetails userDetails, @PathVariable UUID uuid) {
+    public ResponseEntity<CategoryModel> getOne(@AuthenticationPrincipal UserDetails userDetails, @PathVariable UUID uuid) {
         return categoryService.getOne(userDetails.getUsername(), uuid)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
